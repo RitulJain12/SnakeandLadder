@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Snake & Ladder — UI (Working)</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="board-wrap">
+        <div id="board" class="board" aria-label="Snakes and Ladders board"></div>
+
+        <!-- SVG overlay: kept simple 2D shapes (no mouths) -->
+        <svg class="overlay" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" id="overlaySVG">
+          <!-- ladders & snakes positions are visual only -->
+          <!-- (You can edit this SVG later for exact visual alignment) -->
+          <g id="ladders" stroke-linecap="round" stroke-linejoin="round">
+            <!-- simple example ladders (visual) -->
+            <g>
+              <line x1="120" y1="910" x2="120" y2="690" stroke="#c28b52" stroke-width="20"/>
+              <line x1="170" y1="910" x2="170" y2="690" stroke="#c28b52" stroke-width="20"/>
+              <g stroke="#e6c39f" stroke-width="12">
+                <line x1="120" y1="900" x2="170" y2="900"/>
+                <line x1="120" y1="860" x2="170" y2="860"/>
+                <line x1="120" y1="820" x2="170" y2="820"/>
+                <line x1="120" y1="780" x2="170" y2="780"/>
+                <line x1="120" y1="740" x2="170" y2="740"/>
+              </g>
+            </g>
+            
+            <g>
+              <line x1="300" y1="830" x2="300" y2="600" stroke="#c28b52" stroke-width="20"/>
+              <line x1="350" y1="830" x2="350" y2="600" stroke="#c28b52" stroke-width="20"/>
+              <g stroke="#e6c39f" stroke-width="12">
+                <line x1="300" y1="820" x2="350" y2="820"/>
+                <line x1="300" y1="780" x2="350" y2="780"/>
+                <line x1="300" y1="740" x2="350" y2="740"/>
+                <line x1="300" y1="700" x2="350" y2="700"/>
+                <line x1="300" y1="660" x2="350" y2="660"/>
+              </g>
+            </g>
+            
+            <g>
+              <line x1="620" y1="760" x2="620" y2="500" stroke="#c28b52" stroke-width="20"/>
+              <line x1="670" y1="760" x2="670" y2="500" stroke="#c28b52" stroke-width="20"/>
+              <g stroke="#e6c39f" stroke-width="12">
+                <line x1="620" y1="750" x2="670" y2="750"/>
+                <line x1="620" y1="710" x2="670" y2="710"/>
+                <line x1="620" y1="670" x2="670" y2="670"/>
+                <line x1="620" y1="630" x2="670" y2="630"/>
+                <line x1="620" y1="590" x2="670" y2="590"/>
+              </g>
+            </g>
+            
+            <g>
+              <line x1="200" y1="630" x2="200" y2="360" stroke="#c28b52" stroke-width="20"/>
+              <line x1="250" y1="630" x2="250" y2="360" stroke="#c28b52" stroke-width="20"/>
+              <g stroke="#e6c39f" stroke-width="12">
+                <line x1="200" y1="620" x2="250" y2="620"/>
+                <line x1="200" y1="580" x2="250" y2="580"/>
+                <line x1="200" y1="540" x2="250" y2="540"/>
+                <line x1="200" y1="500" x2="250" y2="500"/>
+                <line x1="200" y1="460" x2="250" y2="460"/>
+              </g>
+            </g>
+            
+          </g>
+
+          <g id="snakes" fill="none" stroke-linecap="round">
+            <g><path d="M820 140 C760 220, 840 300, 760 380 C720 420, 740 520, 770 600" stroke="#2ecc71" stroke-width="24"/><path d="M820 140 C760 220, 840 300, 760 380 C720 420, 740 520, 770 600" stroke="#27ae60" stroke-width="10" stroke-dasharray="40 28"/><circle cx="820" cy="140" r="26" fill="#2ecc71" stroke="#1e8f53" stroke-width="5"/><circle cx="812" cy="134" r="5" fill="black"/><circle cx="828" cy="134" r="5" fill="black"/></g>
+            <g><path d="M450 220 C520 300, 460 360, 540 440 C620 520, 500 580, 560 650" stroke="#9b59b6" stroke-width="22"/><path d="M450 220 C520 300, 460 360, 540 440 C620 520, 500 580, 560 650" stroke="#8e44ad" stroke-width="9" stroke-dasharray="40 30"/><circle cx="450" cy="220" r="24" fill="#9b59b6" stroke="#6d3c8b" stroke-width="5"/><circle cx="442" cy="214" r="5" fill="black"/><circle cx="458" cy="214" r="5" fill="black"/></g>
+            <g><path d="M160 450 C230 520, 200 600, 260 670 C300 720, 240 780, 270 830" stroke="#e74c3c" stroke-width="22"/><path d="M160 450 C230 520, 200 600, 260 670 C300 720, 240 780, 270 830" stroke="#c0392b" stroke-width="10" stroke-dasharray="40 26"/><circle cx="160" cy="450" r="22" fill="#e74c3c" stroke="#922b21" stroke-width="5"/><circle cx="152" cy="444" r="5" fill="black"/><circle cx="168" cy="444" r="5" fill="black"/></g>
+            <g><path d="M380 800 C460 860, 390 920, 480 960" stroke="#f1c40f" stroke-width="22"/><path d="M380 800 C460 860, 390 920, 480 960" stroke="#d4ac0d" stroke-width="9" stroke-dasharray="40 26"/><circle cx="380" cy="800" r="24" fill="#f1c40f" stroke="#9a7d0a" stroke-width="5"/><circle cx="372" cy="794" r="5" fill="black"/><circle cx="388" cy="794" r="5" fill="black"/></g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="controls">
+        <div class="panel">
+          <div class="title">Snake & Ladder</div>
+          <div class="sub">Beautiful, responsive board. Hooks ready for your game logic.</div>
+        </div>
+
+        <div class="panel">
+          <div class="title">Player Turn</div>
+          <div id="turnBox" class="sub">Player 1's Turn</div>
+        </div>
+
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div><strong>Players</strong><div style="font-size:12px;color:rgba(230,238,248,0.7)">2 tokens shown</div></div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <div style="width:14px;height:14px;border-radius:50%;background:linear-gradient(180deg,#ff8fa3,#ff6b6b)"></div>
+              <div style="width:14px;height:14px;border-radius:50%;background:linear-gradient(180deg,#8ce5d6,#4ecdc4)"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button id="rollBtn" class="btn">Roll Dice</button>
+            <div id="diceFace" class="dice-face">—</div>
+            <button id="resetBtn" class="btn secondary">Reset</button>
+          </div>
+        </div>
+
+        <div class="panel" style="text-align:center">
+          <small style="color:rgba(230,238,248,0.6)">Want animation along snake path or different theme? Tell me.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="snake.js"></script>
+</body>
+</html>
