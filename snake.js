@@ -66,7 +66,7 @@
     
     const jumps = {
       2:32, 14:44, 33:63, 27:57, 
-      24:5, 75:36, 89:30, 52:13
+      24:5, 75:36, 89:38, 52:13
     };
 
     
@@ -157,7 +157,7 @@
 
       const key = (turn===1)? 'p1' : 'p2';
       const tokenEl = (key==='p1')? P1 : P2;
-
+   
       // compute new pos
       let target = state[key] + dice;
       if(target > 100) target = 100;
@@ -168,11 +168,12 @@
 
      
       checkWin(key);
-
-    
-      turn = turn===1?2:1;
+        console.log(dice);
+        console.log(typeof(dice));
+      if(dice===6) console.log(turn);
+     else turn = turn===1?2:1;
       updateTurnBox();
-
+   
       // re-enable
       rollBtn.classList.remove('disabled');
       rollBtn.disabled = false;
