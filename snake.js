@@ -79,6 +79,8 @@
 
     function updateTurnBox(){
       turnBox.textContent = `Player ${turn}'s Turn`;
+     if(turn==1) {rollBtn.style.backgroundColor='#ff6b6b';rollBtn.style.color=`#000`;turnBox.style.color=`#ff6b6b`}
+     else {rollBtn.style.backgroundColor='#4ecdc4';turnBox.style.color=`#4ecdc4`}
     }
     updateTurnBox();
 
@@ -167,7 +169,7 @@
      
       checkWin(key);
 
-      // switch turn
+    
       turn = turn===1?2:1;
       updateTurnBox();
 
